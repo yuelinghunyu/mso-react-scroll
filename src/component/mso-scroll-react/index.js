@@ -9,24 +9,32 @@ class msoScrollReact extends Component{
     constructor(props){
         super(props)
         this.jroll = null
+        this.pullDownEvent = this.pullDownEvent.bind(this)
+        this.pullUpEvent = this.pullUpEvent.bind(this)
     }
     componentDidMount() {
         let wrappers = this.props.ID || 'wrappers'
-        this.jroll = new Jroll(`#${wrappers}`)
-        this.jroll.refresh()
-        this.jroll.on('scrollEnd', () => {
-            this.jroll.refresh()
+        this.jroll = new Jroll(`#${wrappers}`, {
+            scrollBarY: true
+        })
+        this.pullDownEvent()
+        this.pullUpEvent()
+    }
+    pullDownEvent() {
+        this.jroll.pulldown({
+            refresh: (complete) => {
+                this.jroll.options.page = 1
+                this.jroll.scrollTo(0, 44, 0, true)
+                this.props.pullDownEvent(this.jroll, complete)
+            }
         })
     }
-    componentDidUpdate() {
-        setTimeout(() => {
-            if(this.jroll) {
-                this.jroll.refresh()
+    pullUpEvent() {
+        this.jroll.infinite({
+            getData: (page) => {
+                this.props.pullUpEvent(page)
             }
-        }, 400)
-    }
-    componentWillUnmount() {
-        this.jroll.destroy()
+        })
     }
     render() {
         const {customClass} = this.props

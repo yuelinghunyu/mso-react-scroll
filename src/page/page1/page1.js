@@ -12,13 +12,24 @@ class Page1 extends Component{
         this.state = {
             msg: '欢迎使用mso-react-cli'
         }
+        this.pullDownEvent = this.pullDownEvent.bind(this)
+        this.pullUpEvent = this.pullUpEvent.bind(this)
     }
-
+    pullDownEvent(jroll, complete) {
+        console.log(jroll)
+        complete()
+    }
+    pullUpEvent(page) {
+        console.log(page)
+    }
     render() {
         return (
             <div className='page1-container'>
                 <Header></Header>
-                <Scroll>
+                <Scroll
+                    pullDownEvent = {this.pullDownEvent}
+                    pullUpEvent = {this.pullUpEvent}
+                >
                     <div className='page1-content-container'>
                         {this.state.msg}
                     </div>
