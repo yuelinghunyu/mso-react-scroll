@@ -19,6 +19,7 @@ class msoScrollReact extends Component{
         })
         this.pullDownEvent()
         this.pullUpEvent()
+        console.log(this.props.template)
     }
     pullDownEvent() {
         this.jroll.pulldown({
@@ -31,9 +32,10 @@ class msoScrollReact extends Component{
     }
     pullUpEvent() {
         this.jroll.infinite({
-            getData: (page) => {
-                this.props.pullUpEvent(page)
-            }
+            getData: (page, callback) => {
+                this.props.pullUpEvent(page, callback)
+            },
+            template: this.props.template
         })
     }
     render() {

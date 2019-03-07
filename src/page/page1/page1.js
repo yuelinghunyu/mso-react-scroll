@@ -5,34 +5,57 @@ import './page1.scss'
 // 引用公共组件
 import Header from '@/component/header/header'
 import Scroll from '@/component/mso-scroll-react/index'
+// 引用axios
+import axios from 'axios'
 
 class Page1 extends Component{
     constructor(){
         super()
         this.state = {
-            msg: '欢迎使用mso-react-cli'
+            list: [],
         }
         this.pullDownEvent = this.pullDownEvent.bind(this)
         this.pullUpEvent = this.pullUpEvent.bind(this)
     }
     pullDownEvent(jroll, complete) {
-        console.log(jroll)
         complete()
+        jroll.scroller.innerHTML = "";
+        const url = '../../mock/data-1.json'
+        axios.get(url,{}).then(res => {
+            jroll.infinite_callback(res.data.data)
+            this.setState({
+                list: res.data.data
+            })
+        })
     }
-    pullUpEvent(page) {
-        console.log(page)
+    pullUpEvent(page, callback) {
+        const url = '../../mock/data-' + page + '.json'
+        axios.get(url,{}).then(res => {
+            callback(res.data.data)
+            this.setState({
+                list: res.data.data
+            })
+        })
     }
     render() {
+        let template = null
+        if(this.state.list){
+           this.state.list.map((item)=>{
+                template = <div>
+                    <img src={item.filePath} />
+                    <span>{item.batchId}</span>
+                </div>
+           })
+        }
+        console.log(template)
         return (
             <div className='page1-container'>
                 <Header></Header>
                 <Scroll
                     pullDownEvent = {this.pullDownEvent}
                     pullUpEvent = {this.pullUpEvent}
-                >
-                    <div className='page1-content-container'>
-                        {this.state.msg}
-                    </div>
+                    template = {"adfasd"}
+                > 
                 </Scroll>
             </div>
         )
