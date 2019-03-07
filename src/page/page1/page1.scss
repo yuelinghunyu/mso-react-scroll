@@ -3,10 +3,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    font-size: 20px;
     .page1-content-container{
-        flex: 1;
         display: flex;
-        font-size: 30px;
         justify-content: center;
         align-items: center;
     }

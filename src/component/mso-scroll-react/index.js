@@ -1,7 +1,9 @@
 import "./index.scss"
 
 import React, {Component} from 'react'
-import Jroll from 'jroll' //引用jroll插件，简化版的iscroll
+import Jroll from './jroll' //引用jroll插件，简化版的iscroll
+import './pulldown'
+import './infinite'
 
 class msoScrollReact extends Component{
     constructor(props){
