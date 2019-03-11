@@ -38,23 +38,14 @@ class Page1 extends Component{
         })
     }
     render() {
-        let template = null
-        if(this.state.list){
-           this.state.list.map((item)=>{
-                template = <div>
-                    <img src={item.filePath} />
-                    <span>{item.batchId}</span>
-                </div>
-           })
-        }
-        console.log(template)
+        let template = '<div><img src={{=_obj.filePath}} /><span>{{=_obj.batchId}}</span></div>'
         return (
             <div className='page1-container'>
                 <Header></Header>
                 <Scroll
                     pullDownEvent = {this.pullDownEvent}
                     pullUpEvent = {this.pullUpEvent}
-                    template = {"adfasd"}
+                    template = {template}
                 > 
                 </Scroll>
             </div>
