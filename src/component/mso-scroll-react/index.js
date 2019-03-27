@@ -19,7 +19,6 @@ class msoScrollReact extends Component{
         })
         this.pullDownEvent()
         this.pullUpEvent()
-        console.log(this.props.template)
     }
     pullDownEvent() {
         this.jroll.pulldown({

@@ -38,7 +38,7 @@ class Page1 extends Component{
         })
     }
     render() {
-        let template = '<div><img src={{=_obj.filePath}} /><span>{{=_obj.batchId}}</span></div>'
+        let template = '<div class="template-item"><img src={{=_obj.filePath}} /><span>{{=_obj.batchId}}</span></div>'
         return (
             <div className='page1-container'>
                 <Header></Header>
